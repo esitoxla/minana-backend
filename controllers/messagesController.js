@@ -7,6 +7,8 @@ export const handleContact = async (req, res) => {
     return res.status(400).json({ error: "All fields are required" });
   }
 
+
+  
   try {
     await sendEmail({ name, email, message });
     res.status(200).json({ success: true });
