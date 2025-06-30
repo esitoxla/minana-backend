@@ -1,9 +1,9 @@
 import express from "express";
-import { submitMessage } from "../controllers/messagesController.js";
+import { handleContact } from "../controllers/messagesController";
 
 const router = express.Router();
 
 // POST route for handling form submissions
-router.post("/api/messages", submitMessage);
+router.post("/api/messages", handleContact);
 
 export default router;
