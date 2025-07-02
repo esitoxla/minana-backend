@@ -1,8 +1,17 @@
 import express from "express"
 import cors from "cors"
+import mongoose from "mongoose";
 
-import messageRouter from "./routes/messages.js";
+import productsRouter from "./routes/products.js";
 
+//connect to database
+try {
+    await mongoose.connect(process.env.MONGO_URL);
+    console.log('Database is connected')
+    
+} catch (error) {
+    console.log(error)
+}
 
 const app = express()
 
@@ -10,7 +19,7 @@ app.use(express.json());
 app.use(cors())
 
 //use routes
-app.use(messageRouter);
+app.use(productsRouter);
 
 
 app.listen(3005, () => {
