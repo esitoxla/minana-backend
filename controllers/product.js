@@ -11,7 +11,13 @@ export const getAllProducts = async (req, res) => {
 
     res.status(200).json(products);
   } catch (error) {
-    res.status(422).json({ message: "Failed to fetch products", error });
+    console.error("FETCH ERROR:", error);
+    res
+      .status(422)
+      .json({
+        message: "Failed to fetch products",
+        error: error.message || "Unknown error",
+      });
   }
 };
 
