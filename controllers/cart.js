@@ -42,6 +42,7 @@ export const addToCart = async (req, res) => {
     }
 
     const actualPrice = product.price;
+    const productImage = product.image;
 
     let cart = await Cart.findOne({ userId });
 
@@ -54,6 +55,7 @@ export const addToCart = async (req, res) => {
       pricePerUnit: actualPrice,
       quantity,
       totalPrice,
+      image: productImage,
     };
 
     if (!cart) {

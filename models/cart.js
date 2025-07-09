@@ -33,6 +33,7 @@ const cartItemSchema = new Schema(
       type: Number,
       required: true,
     },
+    image: String,
   },
   { _id: false } //will prevent each item from getting a unique id as the database does
 );
