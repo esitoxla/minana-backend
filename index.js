@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 import productsRouter from "./routes/products.js";
+import cartRouter from "./routes/cart.js";
 
 dotenv.config();
 
@@ -23,7 +24,7 @@ app.use(express.json());
 app.use(cors())
 
 //use routes
-app.use(productsRouter);
+app.use(productsRouter, cartRouter);
 
 
 app.listen(3005, () => {
