@@ -21,7 +21,16 @@ const app = express()
 
 app.use(express.json());
 
-app.use(cors())
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173/", // for local dev
+      "https://minana-services-ltd.netlify.app/product", //  real Netlify domain
+    ],
+    credentials: true,
+  })
+);
+  
 
 //use routes
 app.use(productsRouter, cartRouter);
