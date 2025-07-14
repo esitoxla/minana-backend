@@ -24,7 +24,8 @@ app.use(express.json());
 app.use(
   cors({
     origin: [
-      "https://minana-services-ltd.netlify.app", 
+      "http://localhost:5173", // for local dev
+      "https://minana-services-ltd.netlify.app", //  real Netlify domain
     ],
     credentials: true,
   })
