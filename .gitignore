@@ -1,3 +1,4 @@
 node_modules
 package-lock.json
 .env
+absa-project-workspace.code-workspace

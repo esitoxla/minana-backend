@@ -1,41 +1,38 @@
-import express from "express"
-import cors from "cors"
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import dns from "dns";
 
-import productsRouter from "./routes/products.js";
-import cartRouter from "./routes/cart.js";
+import app from "./app.js";
 
 dotenv.config();
 
-//connect to database
-try {
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log('Database is connected')
-    
-} catch (error) {
-    console.log(error)
-}
+const PORT = process.env.PORT || 3005;
 
-const app = express()
-
-app.use(express.json());
+app.use(cookieParser());
 
 app.use(
   cors({
     origin: [
-      "http://localhost:5173", // for local dev
-      "https://minana-services-ltd.netlify.app", //  real Netlify domain
+      "http://localhost:5174",
+      "https://minana-services-ltd.netlify.app",
     ],
     credentials: true,
-  })
+  }),
 );
-  
-
-//use routes
-app.use(productsRouter, cartRouter);
 
 
-app.listen(3005, () => {
-    console.log("app is listening on port 3005");
-})
+dns.setDefaultResultOrder("ipv4first");
+
+try {
+  await mongoose.connect(process.env.MONGO_URI);
+  console.log("Database is connected");
+
+  app.listen(PORT, () => {
+    console.log(`App is listening on port ${PORT}`);
+  });
+} catch (error) {
+  console.error("Database connection failed:", error);
+  process.exit(1);
+}

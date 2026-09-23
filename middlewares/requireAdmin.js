@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET || "change-this-secret";
 
-const adminMiddleware = (req, res, next) => {
+const requireAdmin = (req, res, next) => {
   const token = req.cookies?.admin_token || req.headers.authorization?.replace("Bearer ", "");
 
   if (!token) {
@@ -23,4 +23,4 @@ const adminMiddleware = (req, res, next) => {
   }
 };
 
-export default adminMiddleware;
+export default requireAdmin;

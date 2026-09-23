@@ -1,6 +1,6 @@
 import { Router } from "express";
 import upload from "../middlewares/upload.js";
-import adminMiddleware from "../middlewares/isAdmin.js";
+import requireAdmin from "../middlewares/requireAdmin.js";
 import {
   postProduct,
   getAllProducts,
@@ -11,14 +11,10 @@ import {
 
 const productsRouter = Router();
 
-productsRouter.post("/products", adminMiddleware, upload.single("image"), postProduct);
-
-productsRouter.get("/products", getAllProducts);
-
-productsRouter.get("/products/:id", getProductById);
-
-productsRouter.put("/products/:id", adminMiddleware, upload.single("image"), updateProduct);
-
-productsRouter.delete("/products/:id", adminMiddleware,  deleteProduct);
+productsRouter.post("/", requireAdmin, upload.single("image"), postProduct);
+productsRouter.get("/", getAllProducts);
+productsRouter.get("/:id", getProductById);
+productsRouter.put("/:id", requireAdmin, upload.single("image"), updateProduct);
+productsRouter.delete("/:id", requireAdmin, deleteProduct);
 
 export default productsRouter
