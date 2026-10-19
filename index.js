@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import cors from "cors";
 import dns from "dns";
 
 import app from "./app.js";
@@ -12,15 +11,6 @@ const PORT = process.env.PORT || 3005;
 
 app.use(cookieParser());
 
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5174",
-      "https://minana-services-ltd.netlify.app",
-    ],
-    credentials: true,
-  }),
-);
 
 
 dns.setDefaultResultOrder("ipv4first");
